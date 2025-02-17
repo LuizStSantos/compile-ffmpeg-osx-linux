@@ -1374,7 +1374,8 @@ buildFfmpeg() {
             cp ../../patches/libndi/libavdevice/libndi_newtek_* libavdevice/
         fi
 
-        EXTRA_CFLAGS=$(echo $EXTRA_CFLAGS | sed "s/-march=generic //")
+        # Modified sed substitution to remove -march=generic completely
+        EXTRA_CFLAGS=$(echo $EXTRA_CFLAGS | sed "s/-march=generic//g")
         if [[ " ${FFMPEG_LIBS[@]} " =~ "--enable-libplacebo" ]]; then
             EXTRA_LD="-Wl,--copy-dt-needed-entries"
         fi
